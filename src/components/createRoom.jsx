@@ -47,7 +47,7 @@ export const CreateRoom=()=>{
         <div>
             <div>Room name:</div>
             <input placeholder="Enter room name..." ref={name}/>
-            <div>Privite?</div>
+            <div>Private?</div>
             <input type="checkbox" onClick={()=>Switch()}/>
 
             <div>

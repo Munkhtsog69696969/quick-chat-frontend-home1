@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode"
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { client } from "./common/client";
@@ -9,7 +9,6 @@ export const Home=()=>{
     const decodedToken=jwt_decode(token).existingUser;
     const userId=decodedToken._id;
     const [rooms,setRooms]=useState([]);
-
     // console.log(decodedToken);
 
     useEffect(()=>{
@@ -19,6 +18,7 @@ export const Home=()=>{
                 setRooms(res.data.rooms)
             })
     },[]);
+    
 
     console.log(rooms)
 
@@ -29,13 +29,13 @@ export const Home=()=>{
                 <div>{decodedToken.username}</div>
             </div>
 
+
             <div>
-                <input placeholder="Enter room code..."/>
-                <button>Join Room</button>
+                <Link to="/createroom">Create Room</Link>
             </div>
 
             <div>
-                <Link to="/createroom">Create new Room</Link>
+                <Link to="/joinroom">Join Room</Link>
             </div>
 
             <div>
