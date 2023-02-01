@@ -6,6 +6,7 @@ import { Login } from './components/Login';
 import { Home } from './components/Home';
 import { CreateRoom } from './components/createRoom';
 import { JoinRoom } from './components/JoinRoom';
+import { Room } from './components/Room';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/createroom' element={<CreateRoom/>}/>
         <Route path='/joinroom' element={<JoinRoom/>}/>
+        <Route path='/room' element={<Room/>}/>
       </Routes>
     </BrowserRouter>
   );

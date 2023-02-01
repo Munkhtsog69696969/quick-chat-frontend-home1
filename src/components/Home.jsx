@@ -3,12 +3,14 @@ import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { client } from "./common/client";
+import { useNavigate } from "react-router-dom";
 
 export const Home=()=>{
     const token=localStorage.getItem("token");
     const decodedToken=jwt_decode(token).existingUser;
     const userId=decodedToken._id;
     const [rooms,setRooms]=useState([]);
+    const navigate=useNavigate();
     // console.log(decodedToken);
 
     useEffect(()=>{
@@ -18,9 +20,16 @@ export const Home=()=>{
                 setRooms(res.data.rooms)
             })
     },[]);
+
+
     
 
-    console.log(rooms)
+    // console.log(rooms)
+
+    function GoToRooms(room){
+        localStorage.setItem("selectedRoomId",room._id);
+        navigate("/room")
+    }
 
     return(
         <div>
@@ -44,9 +53,7 @@ export const Home=()=>{
                 {
                     rooms && rooms.map((item,i)=>{
                         return(
-                            <div key={i}>
-                                {item.name}
-                            </div>
+                            <div key={i} onClick={()=>GoToRooms(item)}>{item.name}</div>
                         )
                     })
                 }
