@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { client } from "./common/client"
 import { useNavigate } from "react-router-dom";
+import styles from "./css/SignupAndLogin.module.css"
 
 export const Login=()=>{
     const email=useRef();
@@ -24,10 +25,13 @@ export const Login=()=>{
     }
 
     return(
-        <div>
-            <input placeholder="Email" ref={email}/>
-            <input placeholder="Password" ref={password}/>
-            <button onClick={()=>Login()}>Log in</button>
+        <div className={styles.container}>
+            <div className={styles.box}>
+                <div className={styles.bigText}>Login</div>
+                <input className={styles.Input} placeholder="Email" ref={email}/>
+                <input className={styles.Input}  placeholder="Password" ref={password}/>
+                <button className={styles.Button}  onClick={()=>Login()}>Log in</button>
+            </div>
         </div>
     )
 }

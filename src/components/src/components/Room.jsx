@@ -33,15 +33,15 @@ export const Room=()=>{
     }
 
 
-    setInterval(()=>{
-        client.get("/getRoomData/"+roomId)
-            .then(async(res)=>{
-                console.log(res.data.texts)
-                setTexts(res.data.texts)
-            }).catch((err)=>{
-                console.log(err)
-            })
-    },1000)
+    // setInterval(()=>{
+    //     client.get("/getRoomData/"+roomId)
+    //         .then(async(res)=>{
+    //             console.log(res.data.texts)
+    //             setTexts(res.data.texts)
+    //         }).catch((err)=>{
+    //             console.log(err)
+    //         })
+    // },1000)
 
 
     return(
