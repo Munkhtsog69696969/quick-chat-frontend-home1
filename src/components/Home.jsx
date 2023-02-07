@@ -4,20 +4,26 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { client } from "./common/client";
 import { useNavigate } from "react-router-dom";
+import styles from "./css/Home.module.css"
 
 export const Home=()=>{
     const token=localStorage.getItem("token");
     const decodedToken=jwt_decode(token).existingUser;
     const userId=decodedToken._id;
+    const [avatarImg,setAvatarImg]=useState();
     const [rooms,setRooms]=useState([]);
     const navigate=useNavigate();
     // console.log(decodedToken);
 
     useEffect(()=>{
+        setAvatarImg(decodedToken.avatarImageUrl);
+    },[])
+
+    useEffect(()=>{
         client.get("/showRoomId/"+userId)
             .then(async(res)=>{
                 // console.log(res.data.rooms);
-                setRooms(res.data.rooms)
+                setRooms(res.data.rooms);
             })
     },[]);
 
@@ -31,25 +37,29 @@ export const Home=()=>{
         navigate("/room")
     }
 
+    function Logout(){
+        localStorage.removeItem("token");
+        navigate("/login")
+    }
+
     return(
-        <div>
-            <div>
-                <div>{decodedToken.email}</div>
-                <div>{decodedToken.username}</div>
+        <div className={styles.container}>  
+
+            <div className={styles.header}> 
+                <img className={styles.avatarImg} src={avatarImg}/>
+                <div className={styles.name}>{decodedToken.email}</div>
+                <div className={styles.name}>{decodedToken.username}</div>
+                <button className={styles.Button} onClick={Logout}>Log out</button>
             </div>
 
 
-            <div>
-                <Link to="/createroom">Create Room</Link>
+            <div className={styles.divs}>
+                {/* <Link className={styles.jumpLink} to="/createroom">Create Room</Link> */}
+                <Link className={styles.jumpLink} to="/joinroom">Join Room</Link>
             </div>
 
-            <div>
-                <Link to="/joinroom">Join Room</Link>
-            </div>
-
-            <div>
+            <div className={styles.divs}>
                 <div>Your rooms:</div>
-
                 {
                     rooms && rooms.map((item,i)=>{
                         return(
@@ -58,6 +68,7 @@ export const Home=()=>{
                     })
                 }
             </div>
+
         </div>
     )
 }
