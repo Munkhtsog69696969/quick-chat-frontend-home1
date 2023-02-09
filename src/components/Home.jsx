@@ -19,23 +19,6 @@ export const Home=()=>{
         setAvatarImg(decodedToken.avatarImageUrl);
     },[])
 
-    useEffect(()=>{
-        client.get("/showRoomId/"+userId)
-            .then(async(res)=>{
-                // console.log(res.data.rooms);
-                setRooms(res.data.rooms);
-            })
-    },[]);
-
-
-    
-
-    // console.log(rooms)
-
-    function GoToRooms(room){
-        localStorage.setItem("selectedRoomId",room._id);
-        navigate("/room")
-    }
 
     function Logout(){
         localStorage.removeItem("token");
@@ -50,23 +33,17 @@ export const Home=()=>{
                 <div className={styles.name}>{decodedToken.email}</div>
                 <div className={styles.name}>{decodedToken.username}</div>
                 <button className={styles.Button} onClick={Logout}>Log out</button>
+                <Link to="/addfriend" className={styles.text}>Add Friend</Link>
             </div>
 
+            <div className={styles.body}>
+                <div className={styles.chats}>
 
-            <div className={styles.divs}>
-                {/* <Link className={styles.jumpLink} to="/createroom">Create Room</Link> */}
-                <Link className={styles.jumpLink} to="/joinroom">Join Room</Link>
-            </div>
+                </div>
 
-            <div className={styles.divs}>
-                <div>Your rooms:</div>
-                {
-                    rooms && rooms.map((item,i)=>{
-                        return(
-                            <div key={i} onClick={()=>GoToRooms(item)}>{item.name}</div>
-                        )
-                    })
-                }
+                <div className={styles.currentChat}>
+
+                </div>
             </div>
 
         </div>

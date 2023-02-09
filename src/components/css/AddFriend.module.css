@@ -1,4 +1,3 @@
-
 .container{
     background-color: black;
     height: 100vh;
@@ -14,7 +13,7 @@
     right: 0;
     background-color: rgb(24, 24, 24);
     width: 100%;
-    height: 8%;
+    height: 10%;
     align-items: center;
     position: relative;
 }
@@ -75,7 +74,14 @@
     height: 100%;
 }
 
-.Button1 {
+.Input{
+    border-radius: 5px;
+    margin: 10px;
+    width: 30%;
+    padding: 8px;
+}
+
+.Button {
     background-color: #EA4C89;
     border-radius: 8px;
     border-style: none;
@@ -86,7 +92,7 @@
     font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 500;
-    height: 40px;
+    height: 39px;
     line-height: 20px;
     list-style: none;
     margin: 0;
@@ -102,8 +108,8 @@
     touch-action: manipulation;
   }
   
-  .Button1:hover,
+  .Button:hover,
   
-  .Button1:focus {
+  .Button:focus {
     background-color: #F082AC;
   }

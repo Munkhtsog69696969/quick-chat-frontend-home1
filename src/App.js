@@ -5,8 +5,8 @@ import { Signup } from './components/Signup';
 import { Login } from './components/Login';
 import { Home } from './components/Home';
 import { CreateRoom } from './components/createRoom';
-import { JoinRoom } from './components/JoinRoom';
 import { Room } from './components/Room';
+import { AddFriend } from './components/AddFriend';
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/createroom' element={<CreateRoom/>}/>
-        <Route path='/joinroom' element={<JoinRoom/>}/>
         <Route path='/room' element={<Room/>}/>
+        <Route path='/addfriend' element={<AddFriend/>}/>
       </Routes>
     </BrowserRouter>
   );
