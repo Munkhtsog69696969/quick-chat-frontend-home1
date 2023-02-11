@@ -22,44 +22,12 @@ export const JoinRoom=()=>{
     async function JoinRoom(){
         const roomCodeInput=roomCode.current.value;
 
-        // await client.put("/pushNewUser" , {roomCode:roomCodeInput , userId:userId})
-        //     .then(async(res)=>{
-        //         // console.log(res.data);
-        //         if(res.data!="Room doesnt exist"){
-        //             setJoinedRoomData(res.data)
-        //         }
-        //     }).catch((err)=>{
-        //         console.log(err)
-        //     })
-
         if(roomCodeInput!=""){
             localStorage.setItem("roomNumber",roomCodeInput)
 
             navigate("/room")
         }
     }
-
-    // useEffect(()=>{
-    //     const roomCodeInput=roomCode.current.value;
-
-    //     if(joinedRoomData!=null){
-    //         client.put("/pushRoomId/"+userId , {roomId:joinedRoomData._id})
-    //             .then(async(res)=>{
-    //                 // console.log(res.data);
-
-    //                 if(roomCodeInput!=""){
-    //                     socket.emit("join_room",{room:roomCodeInput});
-            
-    //                     navigate("/room")
-    //                 }
-
-    //             }).catch((err)=>{
-    //                 console.log(err)
-    //             })
-    //     }
-    // },[joinedRoomData])
-
-    
 
     return(
         <div className={styles.container}>

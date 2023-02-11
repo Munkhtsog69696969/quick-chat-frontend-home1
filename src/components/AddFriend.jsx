@@ -8,25 +8,26 @@ import { client } from "./common/client";
 import jwt_decode from "jwt-decode"
 
 export const AddFriend=()=>{
-    const friendEmail=useRef();
+    const friendCode=useRef();
     const decodedToken=jwt_decode(localStorage.getItem("token")).existingUser;
     const userId=decodedToken._id;
 
     async function Find(){
-        if(friendEmail.current.value!=""){
-            await client.post("/findFriends/"+userId , {friendEmail:friendEmail.current.value})
+        if(friendCode.current.value!=""){
+            await client.post("/findFriends",{usercode:friendCode.current.value})
                 .then(async(res)=>{
-                    console.log(res.data);
+                    console.log(res.data)
                 }).catch((err)=>{
                     console.log(err)
                 })
         }
+        
     }
 
     return(
         <div className={styles.container}>
             <div className={styles.header}>
-                <input ref={friendEmail} placeholder="Enter friend's name..." className={styles.Input}/>
+                <input ref={friendCode} placeholder="Enter friend's code..." className={styles.Input}/>
                 <button className={styles.Button} onClick={Find}>Find</button>
             </div>
         </div>
