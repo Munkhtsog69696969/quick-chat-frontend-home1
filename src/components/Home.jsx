@@ -34,6 +34,7 @@ export const Home=()=>{
                 <div className={styles.name}>{decodedToken.username}</div>
                 <button className={styles.Button} onClick={Logout}>Log out</button>
                 <Link to="/addfriend" className={styles.text}>Add Friend</Link>
+                <Link to="/incomefriendrequest" className={styles.text}>Income friend request</Link>
             </div>
 
             <div className={styles.body}>

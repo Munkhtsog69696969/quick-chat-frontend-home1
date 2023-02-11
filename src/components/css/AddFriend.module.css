@@ -92,7 +92,7 @@
     font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 500;
-    height: 39px;
+    height: fit-content;
     line-height: 20px;
     list-style: none;
     margin: 0;
@@ -106,6 +106,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    margin-left: 5%;
   }
   
   .Button:hover,
@@ -113,3 +114,36 @@
   .Button:focus {
     background-color: #F082AC;
   }
+
+  .users{
+    overflow-y: scroll;
+    overflow: hidden;
+    border: 1px solid red;
+    height: 89%;
+  }
+
+  .user{
+    background-color: rgb(37, 37, 37);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .userInfo{
+    display: inline-block;
+    margin: 1%;
+  }
+
+  .addAndDelete{
+    position: absolute;
+    right: 20%;
+  }
+
+  .iconPlus{
+    color: green;
+    font-size: 30px;
+    background-color: white;
+    border-radius: 25%;
+  }
+
+
