@@ -1,15 +1,10 @@
 
 import styles from "./css/AddFriend.module.css"
-
 import { useRef } from "react";
-
 import { client } from "./common/client";
-
 import jwt_decode from "jwt-decode"
-
 import { useState } from "react";
 import { useEffect } from "react";
-
 import {BsFillPlusSquareFill} from "react-icons/bs"
 
 
@@ -45,8 +40,12 @@ export const AddFriend=()=>{
         }
     }
 
-    async function SendFriendRequest(){
-        console.log(2)
+    async function SendFriendRequest(item){
+        console.log(item)
+        await client.put("/incomeFriendRequest/"+item._id , {myId:userId})
+            .then(async(res)=>{
+                console.log(res.data);
+            })
     }
 
     console.log(decodedFriendToken)
@@ -75,15 +74,13 @@ export const AddFriend=()=>{
                                 </div>
 
                                 <div className={styles.addAndDelete}>
-                                    <BsFillPlusSquareFill className={styles.iconPlus} onClick={SendFriendRequest}></BsFillPlusSquareFill>
+                                    <BsFillPlusSquareFill className={styles.iconPlus} onClick={()=>SendFriendRequest(item)}></BsFillPlusSquareFill>
                                 </div>
                             </div>
                         )
                     })
                 }
             </div>
-            <br></br>
-
         </div>
     )
 }
