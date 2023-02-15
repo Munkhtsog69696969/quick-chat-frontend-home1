@@ -11,8 +11,8 @@ export const Home=()=>{
     const decodedToken=jwt_decode(token).existingUser;
     const userId=decodedToken._id;
     const [avatarImg,setAvatarImg]=useState();
-    const [rooms,setRooms]=useState([]);
     const navigate=useNavigate();
+    const [friends,setFriends]=useState([]);
     // console.log(decodedToken);
 
     useEffect(()=>{
@@ -24,6 +24,18 @@ export const Home=()=>{
         localStorage.removeItem("token");
         navigate("/login")
     }
+
+    useEffect(()=>{
+        client.get("/getUserData/"+userId)
+            .then(async(res)=>{
+                // console.log(res.data);
+                setFriends(res.data)
+            }).catch((err)=>{
+                console.log(err);
+            })
+    },[])
+
+    console.log(friends)
 
     return(
         <div className={styles.container}>  
@@ -38,9 +50,20 @@ export const Home=()=>{
             </div>
 
             <div className={styles.body}>
-                <div className={styles.chats}>
-                    
+                <div className={styles.friends}>
+                    {
+                        friends && friends.map((item,i)=>{
+                            return(
+                                <div className={styles.friendContainer}>
+                                    <img className={styles.avatarImg} src={item.avatarImageUrl}/>
 
+                                    <div>
+                                        <div className={styles.text}>{item.username}</div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
 
                 <div className={styles.currentChat}>
