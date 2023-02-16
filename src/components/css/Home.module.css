@@ -75,6 +75,7 @@
     display: flex;
     border-radius: 10px;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .currentChat{
@@ -117,4 +118,12 @@
   
   .Button1:focus {
     background-color: #F082AC;
+  }
+
+  .currentChatHeader{
+    background-color: rgb(83, 83, 83);
+    width: 100%;
+    height: 8%;
+    display: flex;
+    align-items: center;
   }

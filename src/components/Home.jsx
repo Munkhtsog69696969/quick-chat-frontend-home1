@@ -13,6 +13,7 @@ export const Home=()=>{
     const [avatarImg,setAvatarImg]=useState();
     const navigate=useNavigate();
     const [friends,setFriends]=useState([]);
+    const [selectedFriend,setSelectedFriend]=useState();
     // console.log(decodedToken);
 
     useEffect(()=>{
@@ -37,6 +38,12 @@ export const Home=()=>{
 
     console.log(friends)
 
+    async function currentChat(user){
+        setSelectedFriend(user)
+    }
+
+    console.log("user:",selectedFriend)
+
     return(
         <div className={styles.container}>  
 
@@ -46,7 +53,7 @@ export const Home=()=>{
                 <div className={styles.name}>{decodedToken.username}</div>
                 <button className={styles.Button} onClick={Logout}>Log out</button>
                 <Link to="/addfriend" className={styles.text}>Add Friend</Link>
-                <Link to="/incomefriendrequest" className={styles.text}>Income friend request</Link>
+                <Link to="/incomefriendrequest" className={styles.text}>Incoming friend request</Link>
             </div>
 
             <div className={styles.body}>
@@ -54,7 +61,7 @@ export const Home=()=>{
                     {
                         friends && friends.map((item,i)=>{
                             return(
-                                <div className={styles.friendContainer}>
+                                <div className={styles.friendContainer} onClick={()=>currentChat(item)}>
                                     <img className={styles.avatarImg} src={item.avatarImageUrl}/>
 
                                     <div>
@@ -67,7 +74,14 @@ export const Home=()=>{
                 </div>
 
                 <div className={styles.currentChat}>
+                    <div className={styles.currentChatHeader}>
+                        <img className={styles.avatarImg} src={selectedFriend!=undefined && selectedFriend.avatarImageUrl}/>
+                        <div className={styles.text}>{selectedFriend!=undefined && selectedFriend.username}</div>
+                    </div>
 
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
 
