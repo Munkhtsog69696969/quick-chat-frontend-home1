@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./css/Home.module.css"
 
 import io from "socket.io-client";
-const socket=io.connect("http://localhost:3333");
+const socket=io.connect("http://localhost:1234");
 
 export const Home=()=>{
     const token=localStorage.getItem("token");
@@ -61,7 +61,7 @@ export const Home=()=>{
             .then(async(res)=>{
                 console.log("room:",res.data)
                 setSelectedRoom(res.data)
-                socket.emit("join-room",(res.data[0].roomId))
+                socket.emit("join_room",(res.data[0].roomId))
             })
     }
 
@@ -73,11 +73,18 @@ export const Home=()=>{
         if(selectedRoom!=undefined){
             const _id=selectedRoom[0]._id
 
-            await client.put("/pushTextToRoom/"+_id, {text:message})
+            var dateObj = new Date();
+            var month = dateObj.getUTCMonth() + 1;
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
 
-            socket.emit("send-messages",({room:selectedRoom[0].roomId , message:message}))
+            const newdate = year + "/" + month + "/" + day;
 
-            setMessageList((prev)=>[...prev , message])
+            await client.put("/pushTextToRoom/"+_id, {Text:{text:message , name:decodedToken.username  , imageUrl:decodedToken.avatarImageUrl , date:newdate}})
+
+            socket.emit("send_messages",({room:selectedRoom[0].roomId , message:message , name:decodedToken.username , imageUrl:decodedToken.avatarImageUrl}))
+
+            setMessageList((prev)=>[...prev , {text:message , name:decodedToken.username , imageUrl:decodedToken.imageUrl}])
         }
     }
 
@@ -96,7 +103,7 @@ export const Home=()=>{
     },[selectedRoom])
 
     useEffect(()=>{
-        socket.on("receive-messages",(data)=>{
+        socket.on("receive_messages",(data)=>{
             setMessageList((list)=>[...list , data])
         })
     },[socket])
@@ -137,15 +144,19 @@ export const Home=()=>{
                     </div>
 
                     <div className={styles.currentChatBody}>
-                        {
-                            messageList && messageList.map((item,i)=>{
-                                return(
-                                    <div className={styles.messageContainer}>
-                                        <div>{item}</div>
-                                    </div>
-                                )
-                            })
-                        }
+                        <div className={styles.insideCurrentChatBody}>
+                            {
+                                messageList && messageList.map((item,i)=>{
+                                    console.log("element:",item)
+                                    return(
+                                        <div className={styles.messageContainerOther} key={i}>
+                                            <img className={styles.avatarImg} src={item.imageUrl}/>
+                                            <div className={styles.messageText}>{item.text}</div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
 
                     <div className={styles.currentChatFooter}>

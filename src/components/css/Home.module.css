@@ -24,6 +24,7 @@
     height: 50px;
     border-radius: 25px;
     margin:2%;
+    display: inline-block;
 }
 
 .name{
@@ -129,9 +130,17 @@
   }
 
   .currentChatBody{
-    position: absolute;
+    width: 100%;
     overflow-y: scroll;
-    overflow: hidden;
+    height: 80%;
+    position: relative;
+  }
+
+  .insideCurrentChatBody{
+    overflow-y: scroll;
+    position: relative;
+    overflow: auto;
+    height: 100%;
   }
 
   .currentChatFooter{
@@ -150,8 +159,21 @@
    width: 30%;
   }
 
-  .messageContainer{
-    background-color: black;
-    color: white;
+  .messageContainerOther{
+    background-color: rgb(70, 108, 70);
+    color: rgb(255, 255, 255);
     width: 100%;
+    margin: 10px;
+    max-width: 40%;
+    width: fit-content;
+    word-break: break-all;
+    border-radius: 15px;
+    border: 2px solid rgb(92, 92, 92);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .messageText{
+    display: inline-block;
   }
