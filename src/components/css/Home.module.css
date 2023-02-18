@@ -127,3 +127,31 @@
     display: flex;
     align-items: center;
   }
+
+  .currentChatBody{
+    position: absolute;
+    overflow-y: scroll;
+    overflow: hidden;
+  }
+
+  .currentChatFooter{
+    position: absolute;
+    width: 100%;
+    background-color: rgb(58, 58, 58);
+    height: 10%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .Input{
+   border-radius: 15px;
+   padding: 10px;
+   width: 30%;
+  }
+
+  .messageContainer{
+    background-color: black;
+    color: white;
+    width: 100%;
+  }

@@ -46,8 +46,20 @@ export const IncomeFriendRequest=()=>{
 
     async function AcceptRequest(user){
         console.log(user)
+        
+        let roomId;
+
+        if(decodedToken.usernumber <= user.usernumber){
+            roomId=decodedToken.usercode+user.usercode;
+        }else{
+            roomId=user.usercode+decodedToken.usercode;
+        }
+        await client.post("/createRoom",{roomId:roomId})
+
         await client.post("/acceptRequest/"+userId , {friendId:user._id})
     }
+
+    console.log(decodedToken)
 
     return(
         <div className={styles.container}>
